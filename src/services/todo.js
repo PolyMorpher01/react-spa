@@ -1,22 +1,47 @@
 import httpUtils from '../utils/http';
 
 export function fetchTodos() {
-  console.log('fetchall');
-  return httpUtils.get('/todos');
+  const authTokenHeaders = {
+    headers: {
+      Authorization: localStorage.accessToken
+    }
+  };
+
+  return httpUtils.get('/todos', authTokenHeaders);
 }
 
 export function fetchById(id) {
-  return httpUtils.get('/todos/' + id);
+  const authTokenHeaders = {
+    headers: {
+      Authorization: localStorage.accessToken
+    }
+  };
+  return httpUtils.get('/todos/' + id, authTokenHeaders);
 }
 
 export function addTodo(data) {
-  return httpUtils.post('/todos', data);
+  const authTokenHeaders = {
+    headers: {
+      Authorization: localStorage.accessToken
+    }
+  };
+  return httpUtils.post('/todos', data, authTokenHeaders);
 }
 
 export function updateTodo(data, id) {
-  return httpUtils.put('/todos/' + id, data);
+  const authTokenHeaders = {
+    headers: {
+      Authorization: localStorage.accessToken
+    }
+  };
+  return httpUtils.put('/todos/' + id, data, authTokenHeaders);
 }
 
 export function deleteTodo(id) {
-  return httpUtils.delete('/todos/' + id);
+  const authTokenHeaders = {
+    headers: {
+      Authorization: localStorage.accessToken
+    }
+  };
+  return httpUtils.delete('/todos/' + id, authTokenHeaders);
 }
