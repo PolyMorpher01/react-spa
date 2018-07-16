@@ -2,10 +2,6 @@
   margin: 20px;
 }
 
-a{
-  text-decoration: none;
-}
-
 .clr-fix:after {
   content: "";
   display: table;

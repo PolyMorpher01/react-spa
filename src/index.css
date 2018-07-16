@@ -4,3 +4,23 @@ body {
   font-family: sans-serif;
   background-color: #ffffff;
 }
+
+a{
+  text-decoration: none;  
+}
+
+a:active, a:focus {
+  outline: 0;
+  border: none;
+}
+
+.mgb20{
+  margin-bottom: 20px;
+}
+.mgl20{
+  margin-left: 20px
+}
+
+.mgr20{
+  margin-right: 20px;
+}
