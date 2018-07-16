@@ -13,13 +13,7 @@ function Items(props) {
       <td>{createdDate}</td>
       <td>
         <Link to={'/todos/' + props.todo.id}>
-          <button
-            onClick={e => {
-              props.update(props.todo.id);
-            }}
-          >
-            Update
-          </button>
+          <button>Update</button>
         </Link>
       </td>
       <td>

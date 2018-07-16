@@ -1,37 +1,72 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  withRouter
+} from 'react-router-dom';
+
 import './style.css';
 
 class UpdateTodoForm extends Component {
-    constructor(props) {
-      super(props);
-      this.state = { task: props.task };
-      this.handleChange = this.handleChange.bind(this);
-    }
-  
-    handleChange(event) {
-      this.setState({ task: event.target.value });
-    }
-  
-    render() {
-      return (
-        <form
-          onSubmit={e => {
-            e.preventDefault();
-            this.props.updateTodo(this.state.task);
-          }}
-        >
-          <input
-            type="text"
-            value={this.state.task}
-            onChange={this.handleChange}
-            className="input-button"
-          />
-          <input type="checkbox" value="isCompleted"/> <label htmlFor="isCompleted">Done</label>
-          <div className="update-button"><button type="submit">Update Item</button></div>
-        </form>
-      );
-    }
+  constructor(props) {
+    super(props);
+    this.state = { task: '', isCompleted: 'false' };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleCheckBoxChange = this.handleCheckBoxChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-  
-  export default UpdateTodoForm;
-  
+
+  async componentDidMount() {
+    const data = await this.props.get();
+    this.setState({
+      task: data.data.task,
+      isCompleted: data.data.is_completed
+    });
+  }
+
+  handleInputChange(event) {
+    this.setState({ task: event.target.value });
+  }
+
+  handleCheckBoxChange(event) {
+    this.setState(prevState => ({
+      isCompleted: !prevState.isCompleted
+    }));
+  }
+
+  async handleSubmit(event) {
+    event.preventDefault();
+    const updatedData = {
+      task: this.state.task,
+      is_completed: this.state.isCompleted
+    };
+
+    await this.props.update(updatedData);
+    this.props.history.push('/');
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input
+          type="text"
+          value={this.state.task}
+          onChange={this.handleInputChange}
+          className="input-button"
+        />
+        <input
+          type="checkbox"
+          checked={this.state.isCompleted}
+          onChange={this.handleCheckBoxChange}
+        />
+        <label>Completed</label>
+        <div className="update-button">
+          <button type="submit">Update Item</button>
+        </div>
+      </form>
+    );
+  }
+}
+
+export default withRouter(UpdateTodoForm);

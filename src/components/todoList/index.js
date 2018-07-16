@@ -12,7 +12,6 @@ class TodoList extends Component {
     this.toggleAddNew = this.toggleAddNew.bind(this);
     this.addTodo = this.addTodo.bind(this);
     this.deleteTodo = this.deleteTodo.bind(this);
-    this.updateTodo = this.updateTodo.bind(this);
   }
 
   async componentDidMount() {
@@ -43,35 +42,9 @@ class TodoList extends Component {
     this.setState({ showAddNew: false });
   }
 
-  deleteTodo(id) {
-    let todos = Object.assign([], this.state.todos);
-
-    const index = todos.findIndex(todo => {
-      return (todo.id = id);
-    });
-
-    todos.splice(index, 1);
-
-    this.setState({ todos: todos });
-  }
-
-  updateTodo(id) {
-    /*  let todos = Object.assign([], this.state.todos);
-
-    const index = todos.findIndex(todo => {
-      return (todo.id = id);
-    });
-
-    const updateDate = todos[index].createdDate;
-
-    let date = new Date(updateDate);
-
-    date.setDate(date.getDate() + 1);
-
-    todos[index].createdDate = date.toString();
-
-    this.setState({ todos: todos }); */
-    return;
+  async deleteTodo(id) {
+    await TodoServices.deleteTodo(id);
+    await this.fetchTodos();
   }
 
   render() {
@@ -83,7 +56,6 @@ class TodoList extends Component {
         <TodoTable
           todos={this.state.todos}
           delete={this.deleteTodo}
-          update={this.updateTodo}
         />
       </div>
     );
