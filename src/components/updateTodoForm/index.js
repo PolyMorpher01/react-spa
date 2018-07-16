@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './style.css';
 
 class UpdateTodoForm extends Component {
     constructor(props) {
@@ -25,7 +26,8 @@ class UpdateTodoForm extends Component {
             onChange={this.handleChange}
             className="input-button"
           />
-          <button type="submit">Add Item</button>
+          <input type="checkbox" value="isCompleted"/> <label htmlFor="isCompleted">Done</label>
+          <div className="update-button"><button type="submit">Update Item</button></div>
         </form>
       );
     }

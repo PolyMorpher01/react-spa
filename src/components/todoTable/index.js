@@ -11,8 +11,8 @@ function TodoTable(props) {
         <Headings />
       </thead>
       <tbody>
-        {props.todos.map(item => (
-          <Items key={item.id} todo={item} delete={props.delete} update = {props.update}/>
+        {props.todos.map(todo => (
+          <Items key={todo.id} todo={todo} delete={props.delete} update = {props.update}/>
         ))}
       </tbody>
     </table>

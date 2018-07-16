@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 
 import TodoTable from '../todoTable';
-import AddTodoForm from '../addNewTodoForm'
+import AddTodoForm from '../addNewTodoForm';
 import * as TodoServices from '../../services/todo';
 import './style.css';
 
 class TodoList extends Component {
   constructor(props) {
     super(props);
-    this.state = { todos: [] };
+    this.state = { todos: [], showAddNew: false };
+    this.toggleAddNew = this.toggleAddNew.bind(this);
     this.addTodo = this.addTodo.bind(this);
     this.deleteTodo = this.deleteTodo.bind(this);
     this.updateTodo = this.updateTodo.bind(this);
@@ -16,6 +17,12 @@ class TodoList extends Component {
 
   async componentDidMount() {
     await this.fetchTodos();
+  }
+
+  toggleAddNew() {
+    this.setState(prevState => ({
+      showAddNew: !prevState.showAddNew
+    }));
   }
 
   async fetchTodos() {
@@ -26,12 +33,14 @@ class TodoList extends Component {
 
   async addTodo(task) {
     const data = {
-      task,
+      task
     };
 
     await TodoServices.addTodo(data);
 
     await this.fetchTodos();
+
+    this.setState({ showAddNew: false });
   }
 
   deleteTodo(id) {
@@ -47,7 +56,7 @@ class TodoList extends Component {
   }
 
   updateTodo(id) {
-    let todos = Object.assign([], this.state.todos);
+    /*  let todos = Object.assign([], this.state.todos);
 
     const index = todos.findIndex(todo => {
       return (todo.id = id);
@@ -61,16 +70,16 @@ class TodoList extends Component {
 
     todos[index].createdDate = date.toString();
 
-    this.setState({ todos: todos });
+    this.setState({ todos: todos }); */
+    return;
   }
 
   render() {
     return (
       <div>
-        <button onClick={this.addTodo}>Add new todo</button>
-        <AddTodoForm addTodo={this.addTodo}/>
-        <h1>Todos</h1>
-        <hr />
+        <button onClick={this.toggleAddNew}>Add new todo</button>
+        <AddTodoForm addTodo={this.addTodo} showForm={this.state.showAddNew} />
+        <h4>Todos</h4>
         <TodoTable
           todos={this.state.todos}
           delete={this.deleteTodo}

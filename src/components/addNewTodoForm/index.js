@@ -6,20 +6,25 @@ class AddNewTodoForm extends Component {
     super(props);
     this.state = { task: '' };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
     this.setState({ task: event.target.value });
   }
 
+  async handleSubmit(e) {
+    e.preventDefault();
+    await this.props.addTodo(this.state.task);
+    this.setState({ task: '' });
+  }
+
   render() {
+    const showForm = this.props.showForm;
+    if (!showForm) return null;
+
     return (
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          this.props.addTodo(this.state.task);
-        }}
-      >
+      <form onSubmit={this.handleSubmit}>
         <input
           type="text"
           value={this.state.task}
