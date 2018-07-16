@@ -1,3 +1,25 @@
 .App{
   margin: 20px;
 }
+
+a{
+  text-decoration: none;
+}
+
+.clr-fix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.heading{
+  float: left;
+}
+
+.login-credentials{
+  float: right;
+}
+
+.login-credentials a{
+  padding: 20px
+}

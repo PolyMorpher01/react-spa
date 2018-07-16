@@ -9,11 +9,21 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      <h1>Todo App</h1> <hr/>
         <Router>
           <div>
-          <Route exact path="/" component={TodoList} />
-          <Route exact path="/todos/:id" component={TodoUpdate} />
+            <div className="clr-fix">
+              <Link to="/">
+                <h1 className="heading">Todo App</h1>
+                <div className="login-credentials">
+                  {/* <a href="#">Register</a>
+                  <a href="#">Login</a> */}
+                </div>
+              </Link>
+            </div>
+
+            <hr />
+            <Route exact path="/" component={TodoList} />
+            <Route exact path="/todos/:id" component={TodoUpdate} />
           </div>
         </Router>
       </div>
