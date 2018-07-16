@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 function Headings(props) {
   return (
@@ -7,6 +7,7 @@ function Headings(props) {
       <th>Task</th>
       <th>Is Completed</th>
       <th>Created Date</th>
+      <th>Updated Date</th>
       <th colSpan="2">Actions</th>
     </tr>
   );
