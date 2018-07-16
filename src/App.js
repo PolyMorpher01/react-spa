@@ -9,6 +9,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+      <h1>Todo App</h1> <hr/>
         <Router>
           <div>
           <Route exact path="/" component={TodoList} />
