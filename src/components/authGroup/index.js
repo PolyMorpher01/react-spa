@@ -5,8 +5,7 @@ import * as authService from '../../services/auth';
 function AuthGroup(props) {
   const user = localStorage.user;
 
-  async function logout(e) {
-    e.preventDefault();
+  async function logout() {
     await authService.logout();
     localStorage.removeItem('user');
     localStorage.removeItem('accessToken');
@@ -25,7 +24,7 @@ function AuthGroup(props) {
     return (
       <div>
         Welcome {user}
-        <a onClick={logout}>Log Out</a>
+        <span className="hover-pointer mgl20" onClick={logout}>Log Out</span>
       </div>
     );
   }

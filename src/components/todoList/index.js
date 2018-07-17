@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 import TodoTable from '../todoTable';
 import AddTodoForm from '../addNewTodoForm';
@@ -15,7 +16,8 @@ class TodoList extends Component {
   }
 
   async componentDidMount() {
-    await this.fetchTodos();
+    if (!localStorage.user) this.props.history.push('/login');
+    else await this.fetchTodos();
   }
 
   toggleAddNew() {
@@ -53,13 +55,10 @@ class TodoList extends Component {
         <button onClick={this.toggleAddNew}>Add new todo</button>
         <AddTodoForm addTodo={this.addTodo} showForm={this.state.showAddNew} />
         <h4>Todos</h4>
-        <TodoTable
-          todos={this.state.todos}
-          delete={this.deleteTodo}
-        />
+        <TodoTable todos={this.state.todos} delete={this.deleteTodo} />
       </div>
     );
   }
 }
 
-export default TodoList;
+export default withRouter(TodoList);
